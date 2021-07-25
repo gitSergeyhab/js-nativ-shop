@@ -33,6 +33,8 @@ const sortingFielset = sortingForm.querySelector('.sorting__order');
 const sortingMarkers = sortingForm.querySelectorAll('[name="sorting-order"]');
 const favouritesBtn = sortingForm.querySelector('#favourites');
 
+const popup = document.querySelector('.popup');
+
 export {
   resultsList, filterForm, categoriesSelect,
   slider, priceMin, priceMax,
@@ -42,5 +44,6 @@ export {
   carYearSelect, transmissionRadios, carBodyBoxes,
   submitBtn,
   sortingForm, sortingFielset, sortingMarkers,
-  favouritesBtn
+  favouritesBtn,
+  popup
 };

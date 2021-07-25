@@ -1,14 +1,14 @@
 import {sortingForm, sortingMarkers} from './dom-elements.js';
 
 export const sort = (data) => {
-  let x;
+  let id;
   for (const marker of sortingMarkers) {
     if (marker.checked) {
-      x = marker.id;
+      id = marker.id;
     }
   }
 
-  switch (x) {
+  switch (id) {
     // case 'sort-popular': return data;
     case 'sort-cheap':
       return data.sort((first, second) => first.price - second.price);

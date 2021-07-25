@@ -15,7 +15,7 @@ const markerFav = (date) => {
 export const createCard = (
   {name, price, address: {city, street, building}, 'publish-date': date, photos},
 ) => `
-  <li class="results__item product">
+  <li class="results__item product" data-id=${date}>
   <button class="product__favourite fav-add ${markerFav(date)}" type="button" aria-label="Добавить в избранное" data-id=${date}>
     <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd"

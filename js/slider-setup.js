@@ -45,12 +45,12 @@ slider.noUiSlider.on('update', (___, handle, values) => {
 
 
 export const makeSliderPrices = (data, values) => {
-  const newData = data.filter((elem) => filterByCategory(elem, values))
+  const newData = data.filter((elem) => filterByCategory(elem, values));
   // console.log(newData, 1)
   // console.log(data)
   let minPrice = newData[0].price,
     maxPrice = newData[0].price;
-  // console.log(minPrice, maxPrice)
+  console.log('minPrice', minPrice, maxPrice)
   newData.forEach((elem) => {
     if (elem.price > maxPrice) {
       maxPrice = elem.price;
@@ -70,5 +70,4 @@ export const makeSliderPrices = (data, values) => {
     });
 
   });
-  return data;
 };

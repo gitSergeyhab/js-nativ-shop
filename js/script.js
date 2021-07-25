@@ -11,34 +11,35 @@ import {sort} from './sort.js';
 import {resetForm} from './filters/reset-form.js';
 import {addToFav} from './ad-to-fav.js';
 import {showFav} from './show-fav.js';
+import {makeModal} from './modal.js';
 
 
 const createAllCards = (data) => data.reduce((acc, el) => acc + createCard(el), '');
 
 
-const getCustomData = (addMessage) => (getData(addMessage)
-  .then((data) => makeSliderPrices(data, createFormValuesObj()))
-  .then((data) => sort(data))
-  .then((data) => filterAll(data, createFormValuesObj()))
+const getCustomData = (addMessage) => (
+  getData(addMessage)
+    .then((data) => sort(data))
+    .then((data) => filterAll(data, createFormValuesObj()))
 
-  .then(r => {
-    console.log(r);
-    return r;
-  })
+    .then(r => {
+      console.log(r);
+      return r;
+    })
 
-  .then((res) => createAllCards(res))
-  .then((res) => resultsList.innerHTML = res)
-  // .catch(() => addMessage('red', 'ничено не загрузилось =(('))
+    .then((res) => createAllCards(res))
+    .then((res) => resultsList.innerHTML = res)
+    // .catch(() => addMessage('red', 'ничено не загрузилось =(('))
 );
 
 const getFavoriteData = (addMessage) => (
   getData(addMessage)
     .then((data) => filterFav(data))
 
-    .then(r => {
-      console.log(r);
-      return r;
-    })
+    // .then(r => {
+    //   console.log(r);
+    //   return r;
+    // })
 
     .then((res) => createAllCards(res))
     .then((res) => resultsList.innerHTML = res)
@@ -56,15 +57,19 @@ filterForm.addEventListener('change', () => {
 filterForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 });
-// долбанный firefox умеет только так:
-submitBtn.addEventListener('click', () => {
-  getCustomData(addMessage);
-});
+// долбанный firefox при   <form ... autocomplete="off"/>   умеет только так:
+submitBtn.addEventListener('click', () => getCustomData(addMessage));
 
-categoriesSelect.addEventListener('change', (evt) => resetForm(evt));
+categoriesSelect.addEventListener('change', (evt) => {
+  resetForm(evt);
+  getData().
+    then((data) => makeSliderPrices(data, createFormValuesObj()));
+});
 
 sortingFielset.addEventListener('change', () => getCustomData(addMessage));
 
 addToFav();
 
 showFav(() => getCustomData(addMessage), () => getFavoriteData(addMessage));
+
+makeModal();
