@@ -7,15 +7,14 @@
 //     // labels: false,
 //     // step: 10000
 //   });
-
 import {slider, priceMin, priceMax} from './dom-elements.js';
-import {filterByCategory} from './filters/filter.js'
+import {filterByCategory} from './filters/filter.js';
 
 const sliderPrices = {
   min: 0,
-  max: 1000000000
-}
-  
+  max: 1000000000,
+};
+
 noUiSlider.create(slider, {
   range: {
     min: [0],
@@ -27,16 +26,16 @@ noUiSlider.create(slider, {
   tooltips: true,
   format: {
     to: function (value) {
-        return parseInt(value).toFixed();
+      return parseInt(value).toFixed();
     },
     from: function (value) {
-        return parseInt(value).toFixed();
-    }
-}
+      return parseInt(value).toFixed();
+    },
+  },
 });
 
 
-slider.noUiSlider.on('update', (___, handle,  values) => {
+slider.noUiSlider.on('update', (___, handle, values) => {
   if (handle === 0) {
     priceMin.value = values[handle];
   } else if (handle === 1) {
@@ -49,7 +48,8 @@ export const makeSliderPrices = (data, values) => {
   const newData = data.filter((elem) => filterByCategory(elem, values))
   // console.log(newData, 1)
   // console.log(data)
-  let minPrice = newData[0].price, maxPrice = newData[0].price;
+  let minPrice = newData[0].price,
+    maxPrice = newData[0].price;
   // console.log(minPrice, maxPrice)
   newData.forEach((elem) => {
     if (elem.price > maxPrice) {
@@ -69,8 +69,6 @@ export const makeSliderPrices = (data, values) => {
       step: sliderPrices.max * 0.001,
     });
 
-  })
-
-    
+  });
   return data;
-}
+};

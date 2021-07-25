@@ -33,19 +33,14 @@ const sortingFielset = sortingForm.querySelector('.sorting__order');
 const sortingMarkers = sortingForm.querySelectorAll('[name="sorting-order"]');
 const favouritesBtn = sortingForm.querySelector('#favourites');
 
-
-
-
-
-
 export {
-    resultsList, filterForm, categoriesSelect,
-    slider, priceMin, priceMax, 
-    estateTypeBoxes, squareInput, roomRadios, 
-    cameraTypeBoxes, matrixSelect, videoSelect, 
-    laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
-    carYearSelect, transmissionRadios, carBodyBoxes,
-    submitBtn,
-    sortingForm, sortingFielset, sortingMarkers,
-    favouritesBtn,
+  resultsList, filterForm, categoriesSelect,
+  slider, priceMin, priceMax,
+  estateTypeBoxes, squareInput, roomRadios,
+  cameraTypeBoxes, matrixSelect, videoSelect,
+  laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
+  carYearSelect, transmissionRadios, carBodyBoxes,
+  submitBtn,
+  sortingForm, sortingFielset, sortingMarkers,
+  favouritesBtn
 };

@@ -1,16 +1,12 @@
-import {
-  sortingForm,
-  sortingMarkers
-} from './dom-elements.js'
+import {sortingForm, sortingMarkers} from './dom-elements.js';
 
 export const sort = (data) => {
   let x;
-  for (let marker of sortingMarkers) {
+  for (const marker of sortingMarkers) {
     if (marker.checked) {
       x = marker.id;
     }
   }
-
 
   switch (x) {
     // case 'sort-popular': return data;
