@@ -11,7 +11,7 @@ import {sort} from './sort.js';
 import {resetForm} from './filters/reset-form.js';
 import {addToFav} from './ad-to-fav.js';
 import {showFav} from './show-fav.js';
-import {makeModal} from './modal.js';
+import {makeModal} from './popup/modal.js';
 
 
 const createAllCards = (data) => data.reduce((acc, el) => acc + createCard(el), '');
@@ -19,11 +19,19 @@ const createAllCards = (data) => data.reduce((acc, el) => acc + createCard(el), 
 
 const getCustomData = (addMessage) => (
   getData(addMessage)
+    .then(r => {
+      console.log(1, r);
+      return r;
+    })
     .then((data) => sort(data))
+    .then(r => {
+      console.log(2, r);
+      return r;
+    })
     .then((data) => filterAll(data, createFormValuesObj()))
 
     .then(r => {
-      console.log(r);
+      console.log(3, r);
       return r;
     })
 
@@ -49,9 +57,9 @@ const getFavoriteData = (addMessage) => (
 
 getCustomData(addMessage);
 
-filterForm.addEventListener('change', () => {
-  getCustomData(addMessage);
-});
+// filterForm.addEventListener('change', () => {
+//   getCustomData(addMessage);
+// });
 
 
 filterForm.addEventListener('submit', (evt) => {

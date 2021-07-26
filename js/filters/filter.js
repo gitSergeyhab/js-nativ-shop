@@ -59,6 +59,10 @@ export const filterAll = (data, values) => {
     .filter((elem) => filterByCategory(elem, values))
 
     .filter((elem) => elem.price >= values.price.min && elem.price <= values.price.max) // PRICE
+    // .filter((elem) => {
+    //   console.log('elem: ', elem.price, '  min: ', values.price.min, '  max: ', values.price.max)
+    //   return elem.price >= values.price.min && elem.price <= values.price.max;
+    // }) // PRICE
 
     .filter((elem) => values.estate.type.some((type) => type === elem.filters.type) || // Types homes/camera/laptop
       values.camera.type.some((type) => type === elem.filters.type) ||

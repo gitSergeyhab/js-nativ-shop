@@ -33,6 +33,13 @@ const cameraCategories = {
   mirrorless: 'mirrorless',
 };
 
+// const cameraCategories = {
+//   mirror: 'slr',
+//   digital: 'digital',
+//   mirrorless: 'mirrorless',
+// };
+
+
 const resolutionVideo = {
   'HD': 'hd',
   'Full_HD': 'full-hd',

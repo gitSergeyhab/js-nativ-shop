@@ -1,3 +1,6 @@
+import {formatPrice} from './util.js';
+
+
 const getNumberDate = (date) => {
   const newDate = new Date(+date);
   return `${newDate.getDate()} . ${newDate.getMonth()} . ${newDate.getFullYear()}`;
@@ -38,7 +41,7 @@ export const createCard = (
     <h3 class="product__title">
       <a href="#">${name}</a>
     </h3>
-    <div class="product__price">${price} ₽</div>
+    <div class="product__price">${formatPrice(price)} ₽</div>
     <div class="product__address">${city}, ${street}, ${building}</div>
     <div class="product__date">${getNumberDate(date)}</div>
   </div>
