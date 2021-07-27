@@ -76,7 +76,6 @@ const addCameraCharacteristic = (type, matrix, video) => {
 };
 
 export const createCharTemplates = (data) => {
-  console.log(data)
   const filter = data.filters;
   switch (data.category) {
     case 'Недвижимость': return addEstateCharacteristic(filter.type, filter.area, filter['rooms-count']);

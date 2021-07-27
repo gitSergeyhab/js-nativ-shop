@@ -1,14 +1,8 @@
-import {
-  resultsList
-} from './dom-elements.js';
-
 export const arrayIds = localStorage.getItem('fav-ids') ? JSON.parse(localStorage.getItem('fav-ids')) : [];
-// console.log(arrayIds)
 
-
-export const addToFav = () => {
-  resultsList.addEventListener('click', (evt) => {
-    const button = evt.target.closest('button.product__favourite');
+export const addToFav = (clickElement) => {
+  clickElement.addEventListener('click', (evt) => {
+    const button = evt.target.closest('button.product__favourite') || evt.target.closest('button.gallery__favourite');
     if (button) {
       const id = button.dataset.id;
       const index = arrayIds.indexOf(id);

@@ -7,7 +7,7 @@ const getNumberDate = (date) => {
 };
 
 
-const markerFav = (date) => {
+export const markerFav = (date) => {
   const ids = localStorage.getItem('fav-ids') ? JSON.parse(localStorage.getItem('fav-ids')) : [];
   if (ids.some((id) => id === date)) {
     return 'fav-add--checked';
@@ -15,8 +15,15 @@ const markerFav = (date) => {
   return '';
 };
 
+const getMorePhotoNum = (len) => len < 6 ? '' : len - 5;
+const getMorePhotoClass = (len) => len < 6 ? '' : 'js-more-photo';
+
+const createPhotoLi = (photo, name) => `<img src="${photo}" width="318" height="220" alt="${name}" class="hidden">`;
+const addAllPhotos = (photos, name) => photos.slice(1, 5).reduce((acc, elem) => acc + createPhotoLi(elem, name), '');
+const addAllNavSpans = (photos) => photos.slice(1, 5).reduce((acc) => `${acc} <span class="product__navigation-item"></span>`, '');
+
 export const createCard = (
-  {name, price, address: {city, street, building}, 'publish-date': date, photos},
+  {name, price, address: {city, street}, 'publish-date': date, photos},
 ) => `
   <li class="results__item product" data-id=${date}>
   <button class="product__favourite fav-add ${markerFav(date)}" type="button" aria-label="Добавить в избранное" data-id=${date}>
@@ -27,14 +34,12 @@ export const createCard = (
     </svg>
   </button>
   <div class="product__image">
-    <div class="product__image-more-photo hidden">+2 фото</div>
+    <div class="product__image-more-photo hidden ${getMorePhotoClass(photos.length)}">+${getMorePhotoNum(photos.length)} фото</div>
     <img src="${photos[0]}" width="318" height="220" alt="${name}">
+    ${addAllPhotos(photos, name)}
     <div class="product__image-navigation hidden">
       <span class="product__navigation-item product__navigation-item--active"></span>
-      <span class="product__navigation-item"></span>
-      <span class="product__navigation-item"></span>
-      <span class="product__navigation-item"></span>
-      <span class="product__navigation-item"></span>
+      ${addAllNavSpans(photos)}
     </div>
   </div>
   <div class="product__content">
@@ -42,7 +47,7 @@ export const createCard = (
       <a href="#">${name}</a>
     </h3>
     <div class="product__price">${formatPrice(price)} ₽</div>
-    <div class="product__address">${city}, ${street}, ${building}</div>
+    <div class="product__address">${city}, ${street}</div>
     <div class="product__date">${getNumberDate(date)}</div>
   </div>
   </li>`;

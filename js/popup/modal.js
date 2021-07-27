@@ -2,6 +2,7 @@ import {resultsList /*, popup*/} from '../dom-elements.js';
 import {createModal} from './create-modal.js';
 import {getData} from '../api.js';
 import {addMap} from '../map.js';
+import {showPopupSlider} from '../image-sliders/popup-slider.js';
 
 
 const getNotFoundMessage = () => console.log('Not Element') // ПРМДУМАТЬ СООБЩЕНИЕ
@@ -39,7 +40,11 @@ const openPopup = (id) => {
         popupCardElement.removeEventListener('click', onOutsidePopupClick);
         document.removeEventListener('keydown', onEscPress);
       }
+
       document.body.append(popupCardElement);
+
+      showPopupSlider();
+
       addMap(res);
     });
 };
@@ -47,9 +52,12 @@ const openPopup = (id) => {
 export const makeModal = () => {
   resultsList.addEventListener('click', (evt) => {
     evt.preventDefault();
-    if (evt.target.closest('.product__image > img') || evt.target.closest('.product__title > a')) {
-      // openPopup();
-      const cardLi = evt.target.closest('.results__item');
+    if (
+      evt.target.closest('.product__image > img') ||
+      evt.target.closest('.product__title > a') ||
+      evt.target.closest('.product__image-more-photo')
+    ) {
+      const cardLi = evt.target.closest('.results__item')  || evt.target.classList.contains('product__image-more-photo');
       cardLi ? openPopup(cardLi.dataset.id) : getNotFoundMessage();
     }
   });
