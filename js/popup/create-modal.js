@@ -68,8 +68,8 @@ export const createModal = (data) => {
               </div>
             </div>
             <div class="popup__right">
-              <div class="popup__map">
-                <img src="img/map.jpg" width="268" height="180" alt="${city}, ${street}, ${building}">
+              <div class="popup__map" id="js-map">
+
               </div>
               <div class="popup__address">${city}, ${street}, ${building}</div>
             </div>

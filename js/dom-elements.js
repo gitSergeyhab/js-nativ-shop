@@ -29,7 +29,7 @@ const submitBtn = filterForm.querySelector('.filter__button');
 
 
 const sortingForm = document.querySelector('.sorting__form');
-const sortingFielset = sortingForm.querySelector('.sorting__order');
+const sortingFieldset = sortingForm.querySelector('.sorting__order');
 const sortingMarkers = sortingForm.querySelectorAll('[name="sorting-order"]');
 const favouritesBtn = sortingForm.querySelector('#favourites');
 
@@ -43,7 +43,7 @@ export {
   laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
   carYearSelect, transmissionRadios, carBodyBoxes,
   submitBtn,
-  sortingForm, sortingFielset, sortingMarkers,
+  sortingForm, sortingFieldset, sortingMarkers,
   favouritesBtn,
   popup
 };

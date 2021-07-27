@@ -12,7 +12,7 @@ import {filterByCategory} from './filters/filter.js';
 
 const sliderPrices = {
   min: 0,
-  max: 1000000000,
+  max: 100000000,
 };
 
 noUiSlider.create(slider, {
@@ -49,7 +49,7 @@ slider.noUiSlider.on('update', (___, handle, values) => {
 
 export const makeSliderPrices = (data, values) => {
   const newData = data.filter((elem) => filterByCategory(elem, values));
-  // console.log(newData, 1)
+  console.log(newData, 111)
   // console.log(data)
   let minPrice = newData[0].price,
     maxPrice = newData[0].price;
@@ -73,4 +73,5 @@ export const makeSliderPrices = (data, values) => {
     start: [sliderPrices.min * 0.99, sliderPrices.max * 1.01],
     step: sliderPrices.max * 0.001,
   });
+  return data;
 };

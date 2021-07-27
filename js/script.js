@@ -6,7 +6,7 @@ import {addMessage} from './inform-message.js';
 import {filterAll} from './filters/filter.js';
 import {filterFav} from './filters/filter-fav.js';
 import {createFormValuesObj} from './filters/create-form-values-obj.js';
-import {resultsList, categoriesSelect, filterForm, submitBtn, sortingFielset} from './dom-elements.js';
+import {resultsList, categoriesSelect, filterForm, submitBtn, sortingFieldset} from './dom-elements.js';
 import {sort} from './sort.js';
 import {resetForm} from './filters/reset-form.js';
 import {addToFav} from './ad-to-fav.js';
@@ -15,10 +15,11 @@ import {makeModal} from './popup/modal.js';
 
 
 const createAllCards = (data) => data.reduce((acc, el) => acc + createCard(el), '');
+const optionalDefault = (data) => data;
 
-
-const getCustomData = (addMessage) => (
+const getCustomData = (addMessage, optional = optionalDefault) => (
   getData(addMessage)
+    .then(optional)
     .then(r => {
       console.log(1, r);
       return r;
@@ -55,11 +56,7 @@ const getFavoriteData = (addMessage) => (
 );
 
 
-getCustomData(addMessage);
-
-// filterForm.addEventListener('change', () => {
-//   getCustomData(addMessage);
-// });
+getCustomData(addMessage, (data) => makeSliderPrices(data, createFormValuesObj())); // второй параметр выставляет слайдер цен
 
 
 filterForm.addEventListener('submit', (evt) => {
@@ -74,10 +71,13 @@ categoriesSelect.addEventListener('change', (evt) => {
     then((data) => makeSliderPrices(data, createFormValuesObj()));
 });
 
-sortingFielset.addEventListener('change', () => getCustomData(addMessage));
+sortingFieldset.addEventListener('change', () => getCustomData(addMessage));
 
 addToFav();
 
 showFav(() => getCustomData(addMessage), () => getFavoriteData(addMessage));
 
 makeModal();
+
+
+

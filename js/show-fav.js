@@ -5,7 +5,7 @@ import {resultsList, filterForm, categoriesSelect,
   laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
   carYearSelect, transmissionRadios, carBodyBoxes,
   submitBtn,
-  sortingForm, sortingFielset, sortingMarkers,
+  sortingForm, sortingFieldset, sortingMarkers,
   favouritesBtn
 } from './dom-elements.js';
 
@@ -17,13 +17,13 @@ export const showFav = (getUsualData, getFavData) => {
   favouritesBtn.addEventListener('change', () => {
     if (favouritesBtn.checked) {
       activeFields(fieldsets, true);
-      activeFields([sortingFielset], true);
+      activeFields([sortingFieldset], true);
       activeFields([matrixSelect, videoSelect, carYearSelect, submitBtn], true);
       filterForm.style.pointerEvents = 'none';
       return getFavData();
     } else {
       activeFields(fieldsets);
-      activeFields([sortingFielset]);
+      activeFields([sortingFieldset]);
       activeFields([matrixSelect, videoSelect, carYearSelect, submitBtn]);
       filterForm.style.pointerEvents = '';
       return getUsualData();

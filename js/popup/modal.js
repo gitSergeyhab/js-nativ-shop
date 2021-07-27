@@ -1,6 +1,8 @@
 import {resultsList /*, popup*/} from '../dom-elements.js';
 import {createModal} from './create-modal.js';
 import {getData} from '../api.js';
+import {addMap} from '../map.js';
+
 
 const getNotFoundMessage = () => console.log('Not Element') // ПРМДУМАТЬ СООБЩЕНИЕ
 
@@ -37,8 +39,8 @@ const openPopup = (id) => {
         popupCardElement.removeEventListener('click', onOutsidePopupClick);
         document.removeEventListener('keydown', onEscPress);
       }
-
       document.body.append(popupCardElement);
+      addMap(res);
     });
 };
 
