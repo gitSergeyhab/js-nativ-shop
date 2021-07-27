@@ -1,6 +1,7 @@
 import {createCharTemplates} from './create-prod-char-templates.js';
-import {formatPrice} from '../util.js';
-import {markerFav} from '../create-card.js'
+import {formatPrice, formateDate} from '../util.js';
+import {markerFav} from '../create-card.js';
+
 
 export const createModal = (data) => {
 
@@ -20,12 +21,6 @@ export const createModal = (data) => {
 
   const getPhotoList = (photos) => photos.reduce((acc, img) => acc + createPhotoLi(img), '');
 
-  const getDiffDate = (date) =>  { // -
-    const publishedDate = new Date(+date);
-    const newDate = new Date();
-    return `${Math.round((newDate - publishedDate)/60/60/24/1000)} дней назад`;
-    // return `${newDate.getDate()} . ${newDate.getMonth()} . ${newDate.getFullYear()}`;
-  };
   const {building, city, street} = data.address;
   return `
         <div class="popup__inner">
@@ -34,7 +29,7 @@ export const createModal = (data) => {
               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.292893 0.292893C0.683418 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L8 6.58579L14.2929 0.292893C14.6834 -0.0976311 15.3166 -0.0976311 15.7071 0.292893C16.0976 0.683418 16.0976 1.31658 15.7071 1.70711L9.41421 8L15.7071 14.2929C16.0976 14.6834 16.0976 15.3166 15.7071 15.7071C15.3166 16.0976 14.6834 16.0976 14.2929 15.7071L8 9.41421L1.70711 15.7071C1.31658 16.0976 0.683418 16.0976 0.292893 15.7071C-0.0976311 15.3166 -0.0976311 14.6834 0.292893 14.2929L6.58579 8L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893Z"/>
             </svg>
           </button>
-          <div class="popup__date">${getDiffDate(data['publish-date'])}</div>
+          <div class="popup__date">${formateDate(data['publish-date'])}</div>
           <h3 class="popup__title">${data.name}</h3>
           <div class="popup__price">${formatPrice(data.price)} ₽</div>
           <div class="popup__columns">

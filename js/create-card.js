@@ -1,11 +1,4 @@
-import {formatPrice} from './util.js';
-
-
-const getNumberDate = (date) => {
-  const newDate = new Date(+date);
-  return `${newDate.getDate()} . ${newDate.getMonth()} . ${newDate.getFullYear()}`;
-};
-
+import {formatPrice, formateDate} from './util.js';
 
 export const markerFav = (date) => {
   const ids = localStorage.getItem('fav-ids') ? JSON.parse(localStorage.getItem('fav-ids')) : [];
@@ -48,6 +41,6 @@ export const createCard = (
     </h3>
     <div class="product__price">${formatPrice(price)} ₽</div>
     <div class="product__address">${city}, ${street}</div>
-    <div class="product__date">${getNumberDate(date)}</div>
+    <div class="product__date">${formateDate(date)}</div>
   </div>
   </li>`;

@@ -1,4 +1,4 @@
-import {resultsList /*, popup*/} from '../dom-elements.js';
+import {resultsList, submitBtn} from '../dom-elements.js';
 import {createModal} from './create-modal.js';
 import {getData} from '../api.js';
 import {addMap} from '../map.js';
@@ -39,6 +39,8 @@ const openPopup = (id) => {
         popupCloseBtn.removeEventListener('click', onCloseBtnClick);
         popupCardElement.removeEventListener('click', onOutsidePopupClick);
         document.removeEventListener('keydown', onEscPress);
+
+        // submitBtn.click(); // обновить избранное после закрытия
       }
 
       document.body.append(popupCardElement);
