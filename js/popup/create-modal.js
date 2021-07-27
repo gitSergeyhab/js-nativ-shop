@@ -4,7 +4,6 @@ import {markerFav} from '../create-card.js';
 
 
 export const createModal = (data) => {
-
   const getClassRating = (rating) => {
     if (rating < 4) {
       return 'seller--bad';

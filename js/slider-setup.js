@@ -1,12 +1,4 @@
-// export const mySlider = new rSlider({
-//     target: '#sampleSlider',
-//     values: [10000, 1000000],
-//     range: true,
-//     // tooltip: true,
-//     // scale: true,
-//     // labels: false,
-//     // step: 10000
-//   });
+
 import {slider, priceMin, priceMax} from './dom-elements.js';
 import {filterByCategory} from './filters/filter.js';
 
@@ -26,10 +18,10 @@ noUiSlider.create(slider, {
   tooltips: true,
   format: {
     to: function (value) {
-      return parseInt(value).toFixed();
+      return (+value).toFixed();
     },
     from: function (value) {
-      return parseInt(value).toFixed();
+      return (+value).toFixed();
     },
   },
 });
@@ -38,19 +30,14 @@ noUiSlider.create(slider, {
 slider.noUiSlider.on('update', (___, handle, values) => {
   if (handle === 0) {
     priceMin.value = values[handle];
-    // console.log('priceMin.value', priceMin.value, values[handle])
-
   } else if (handle === 1) {
     priceMax.value = values[handle];
-    // console.log('priceMax.value', priceMax.value, values[handle])
   }
 });
 
 
 export const makeSliderPrices = (data, values) => {
   const newData = data.filter((elem) => filterByCategory(elem, values));
-  console.log(newData, 111)
-  // console.log(data)
   let minPrice = newData[0].price,
     maxPrice = newData[0].price;
   newData.forEach((elem) => {

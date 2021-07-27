@@ -1,4 +1,4 @@
-import {sortingForm, sortingMarkers} from './dom-elements.js';
+import {sortingMarkers} from './dom-elements.js';
 
 export const sort = (data) => {
   let id;
@@ -9,7 +9,6 @@ export const sort = (data) => {
   }
 
   switch (id) {
-    // case 'sort-popular': return data;
     case 'sort-cheap':
       return data.sort((first, second) => first.price - second.price);
     case 'sort-new':

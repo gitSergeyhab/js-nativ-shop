@@ -1,11 +1,11 @@
-import {resultsList} from './dom-elements.js'
+import {resultsList} from './dom-elements.js';
 
 export const arrayIds = localStorage.getItem('fav-ids') ? JSON.parse(localStorage.getItem('fav-ids')) : [];
 
 export const addToFav = (clickElement) => {
   clickElement.addEventListener('click', (evt) => {
-    const favFromList = evt.target.closest('button.product__favourite');
-    const favFromPopup = evt.target.closest('button.gallery__favourite')
+    const favFromList = evt.target.closest('button.product__favourite'); // добавление в выведеном списке
+    const favFromPopup = evt.target.closest('button.gallery__favourite'); // ... в попаре
     const button = favFromList || favFromPopup;
     if (button) {
       const id = button.dataset.id;

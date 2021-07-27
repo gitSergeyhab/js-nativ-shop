@@ -15,5 +15,5 @@ export const showPopupSlider = () => {
       img.classList.add(IMG_CLASS_ACTIVE);
     });
   });
-  addToFav(popupGallery);
+  addToFav(popupGallery); // что бы добавление в избранные работало и при открытом попапе
 };

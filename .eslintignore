@@ -1,1 +1,9 @@
 webpack.config.js
+
+leaflet/leaflet.css
+leaflet/leaflet.js
+leaflet/leaflet.js.map
+
+js/nouislider/nouislider.js
+js/nouislider/nouislider.css
+

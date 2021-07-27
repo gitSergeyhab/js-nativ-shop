@@ -1,11 +1,8 @@
-import {resultsList, submitBtn} from '../dom-elements.js';
+import {resultsList} from '../dom-elements.js';
 import {createModal} from './create-modal.js';
 import {getData} from '../api.js';
 import {addMap} from '../map.js';
 import {showPopupSlider} from '../image-sliders/popup-slider.js';
-
-
-const getNotFoundMessage = () => console.log('Not Element') // ПРМДУМАТЬ СООБЩЕНИЕ
 
 const openPopup = (id) => {
   getData()
@@ -39,8 +36,6 @@ const openPopup = (id) => {
         popupCloseBtn.removeEventListener('click', onCloseBtnClick);
         popupCardElement.removeEventListener('click', onOutsidePopupClick);
         document.removeEventListener('keydown', onEscPress);
-
-        // submitBtn.click(); // обновить избранное после закрытия
       }
 
       document.body.append(popupCardElement);
@@ -55,12 +50,12 @@ export const makeModal = () => {
   resultsList.addEventListener('click', (evt) => {
     evt.preventDefault();
     if (
-      evt.target.closest('.product__image > img') ||
-      evt.target.closest('.product__title > a') ||
-      evt.target.closest('.product__image-more-photo')
+      evt.target.closest('.product__image > img') || // попап при тыке на картинку
+      evt.target.closest('.product__title > a') || // ... на название
+      evt.target.closest('.product__image-more-photo') // .. на идиотскую запись, что фоток на Х польше 5
     ) {
       const cardLi = evt.target.closest('.results__item')  || evt.target.classList.contains('product__image-more-photo');
-      cardLi ? openPopup(cardLi.dataset.id) : getNotFoundMessage();
+      cardLi ? openPopup(cardLi.dataset.id) : null;
     }
   });
 };

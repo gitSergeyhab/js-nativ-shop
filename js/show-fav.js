@@ -1,11 +1,8 @@
-import {resultsList, filterForm, categoriesSelect,
-  slider, priceMin, priceMax,
-  estateTypeBoxes, squareInput, roomRadios,
-  cameraTypeBoxes, matrixSelect, videoSelect,
-  laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
-  carYearSelect, transmissionRadios, carBodyBoxes,
+import { filterForm,
+  matrixSelect, videoSelect,
+  carYearSelect,
   submitBtn,
-  sortingForm, sortingFieldset, sortingMarkers,
+  sortingFieldset,
   favouritesBtn
 } from './dom-elements.js';
 
@@ -15,11 +12,13 @@ const activeFields = (fields, block = false) => fields.forEach((field) => field.
 
 export const showFav = (getUsualData, getFavData) => {
   favouritesBtn.addEventListener('change', () => {
+    // октровка фильтров при клике на избранные
     if (favouritesBtn.checked) {
       activeFields(fieldsets, true);
       activeFields([sortingFieldset], true);
       activeFields([matrixSelect, videoSelect, carYearSelect, submitBtn], true);
       filterForm.style.pointerEvents = 'none';
+      // фильтрация по избранным
       return getFavData();
     } else {
       activeFields(fieldsets);

@@ -33,13 +33,6 @@ const cameraCategories = {
   mirrorless: 'mirrorless',
 };
 
-// const cameraCategories = {
-//   mirror: 'slr',
-//   digital: 'digital',
-//   mirrorless: 'mirrorless',
-// };
-
-
 const resolutionVideo = {
   'HD': 'hd',
   'Full_HD': 'full-hd',
@@ -51,12 +44,6 @@ const laptopCategories = {
   home: 'home',
   ultra: 'ultrabook',
   gaming: 'gaming',
-};
-
-const processorCategories = {
-  i3: 'i3',
-  i5: 'i5',
-  i7: 'i7',
 };
 
 const carCategories = {
@@ -72,7 +59,7 @@ export {
   filterValues,
   mainCategories,
   estateCategories, estateRooms,
-  laptopCategories, processorCategories,
+  laptopCategories,
   cameraCategories, resolutionVideo,
   carCategories
 };

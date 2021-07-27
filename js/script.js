@@ -13,60 +13,40 @@ import {addToFav} from './ad-to-fav.js';
 import {showFav} from './show-fav.js';
 import {makeModal} from './popup/modal.js';
 import {showSmallSlider} from './image-sliders/small-slider.js';
+import {checkEmptyData} from './check-empty-data.js';
 
 
 const createAllCards = (data) => data.reduce((acc, el) => acc + createCard(el), '');
 const optionalDefault = (data) => data;
 
-const getCustomData = (addMessage, optional = optionalDefault) => (
+const getCustomData = (optional = optionalDefault) => (
   getData(addMessage)
     .then(optional)
-    // .then(r => {
-    //   console.log(1, r);
-    //   return r;
-    // })
     .then((data) => sort(data))
-    // .then(r => {
-    //   console.log(2, r);
-    //   return r;
-    // })
     .then((data) => filterAll(data, createFormValuesObj()))
-
-    // .then(r => {
-    //   console.log(3, r);
-    //   return r;
-    // })
-
-    .then((res) => createAllCards(res))
-    .then((res) => resultsList.innerHTML = res)
+    .then((data) => checkEmptyData(data, 'filter'))
+    .then((data) => createAllCards(data))
+    .then((data) => resultsList.innerHTML = data)
     .then(() => showSmallSlider())
-
-    // .catch(() => addMessage('red', 'ничено не загрузилось =(('))
+    .catch(() => addMessage('red', 'ничено не загрузилось =(('))
 );
 
-const getFavoriteData = (addMessage) => (
+const getFavoriteData = () => (
   getData(addMessage)
     .then((data) => filterFav(data))
-
-    // .then(r => {
-    //   console.log(r);
-    //   return r;
-    // })
-
-    .then((res) => createAllCards(res))
-    .then((res) => resultsList.innerHTML = res)
-  // .catch(() => addMessage('red', 'ничено не загрузилось =(('))
+    .then((data) => checkEmptyData(data, 'favor'))
+    .then((data) => createAllCards(data))
+    .then((data) => resultsList.innerHTML = data)
+    .catch(() => addMessage('red', 'ничено не загрузилось =(('))
 );
 
+getCustomData((data) => makeSliderPrices(data, createFormValuesObj())); // параметр выставляет слайдер цен
 
-getCustomData(addMessage, (data) => makeSliderPrices(data, createFormValuesObj())); // второй параметр выставляет слайдер цен
 
-
-filterForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
 // долбанный firefox при   <form ... autocomplete="off"/>   умеет только так:
-submitBtn.addEventListener('click', () => getCustomData(addMessage));
+submitBtn.addEventListener('click', () => getCustomData());
+filterForm.addEventListener('submit', (evt) => evt.preventDefault());
+
 
 categoriesSelect.addEventListener('change', (evt) => {
   resetForm(evt);
@@ -74,12 +54,10 @@ categoriesSelect.addEventListener('change', (evt) => {
     then((data) => makeSliderPrices(data, createFormValuesObj()));
 });
 
-sortingFieldset.addEventListener('change', () => getCustomData(addMessage));
+sortingFieldset.addEventListener('change', () => getCustomData());
 
 addToFav(resultsList);
 
-showFav(() => getCustomData(addMessage), () => getFavoriteData(addMessage));
+showFav(getCustomData, getFavoriteData);
 
 makeModal();
-
-

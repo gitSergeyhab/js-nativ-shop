@@ -1,29 +1,13 @@
-import {
-  resultsList, filterForm, categoriesSelect,
-  slider, priceMin, priceMax,
-  estateTypeBoxes, squareInput, roomRadios,
-  cameraTypeBoxes, matrixSelect, videoSelect,
-  laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
-  carYearSelect, transmissionRadios, carBodyBoxes,
-} from '../dom-elements.js';
+import {filterForm, categoriesSelect} from '../dom-elements.js';
 
-import {
-  filterValues,
-  mainCategories,
-  estateCategories, estateRooms,
-  laptopCategories, processorCategories,
-  cameraCategories, resolutionVideo,
-  carCategories,
-} from '../form-categories.js';
+import {filterValues, mainCategories} from '../form-categories.js';
 
 const CATEGORY_SPLIT = 'filter__';
 
 const hidingFilters = document.querySelectorAll('.filter__form > div:not(.filter__select-wrapper):not(.filter__range)');
 
-// const getCategory = (className) => className.split(CATEGORY_SPLIT)[1];
-
-const mainSideFilter = () => {
-
+const hideOtherFilters = () => {
+  // при выборе одной категории, скрыть фильтры других
   categoriesSelect.addEventListener('change', (evt) => {
     const value = evt.target.value;
     if (value !== filterValues.all) {
@@ -37,10 +21,7 @@ const mainSideFilter = () => {
       });
     }
   });
-
 };
-
-// export const mainFilter = (x) => x;
 
 export const filterByCategory = (elem, values) => mainCategories[values.category] === elem.category || !mainCategories[values.category];
 
@@ -59,11 +40,6 @@ export const filterAll = (data, values) => {
     .filter((elem) => filterByCategory(elem, values))
 
     .filter((elem) => elem.price >= values.price.min && elem.price <= values.price.max) // PRICE
-    // .filter((elem) => {
-
-    //   console.log('elem: ', elem.price, '  min: ', values.price.min, '  max: ', values.price.max)
-    //   return elem.price >= values.price.min && elem.price <= values.price.max;
-    // }) // PRICE
 
     .filter((elem) => values.estate.type.some((type) => type === elem.filters.type) || // Types homes/camera/laptop
       values.camera.type.some((type) => type === elem.filters.type) ||
@@ -110,4 +86,4 @@ export const filterAll = (data, values) => {
     .slice(0, 7);
 };
 
-mainSideFilter();
+hideOtherFilters();

@@ -11,17 +11,12 @@ export const addMap = (data) => {
   const mainMarker = L.marker({
     lat,
     lng,
-  },
-    /*{
-       icon: mainPinIcon,
-     }*/
-  );
+  });
   mainMarker.addTo(map);
-  map.on('load', () => console.log('map-load!!!'))
-    .setView({
-      lat,
-      lng,
-    }, SCALE);
+  map.setView({
+    lat,
+    lng,
+  }, SCALE);
 
   L.tileLayer(
     openStreetMapTile.png, {
@@ -30,5 +25,4 @@ export const addMap = (data) => {
   ).addTo(map);
 
   mainMarker.addTo(map);
-
 };

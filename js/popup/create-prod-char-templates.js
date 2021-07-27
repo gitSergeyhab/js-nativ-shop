@@ -2,11 +2,12 @@ import {estateT, carT, cameraT, laptopT} from '../translite.js';
 
 const checkValue = (value) => {
   if (!value || value === '-' || value === ' ') {
-    return null;
+    return null; // проверка, что данные есть и они не какая-нибудь х - ня
   }
   return value;
 };
 
+//для каждой категории свой сборщик характеристик
 const addCarCharacteristic = (year, transmission, body) => {
   const yearText = checkValue(year) ? `<li class="chars__item">
       <div class="chars__name">Год выпуска</div>
@@ -74,14 +75,14 @@ const addCameraCharacteristic = (type, matrix, video) => {
     </li>` : '';
   return typeText + matrixText + videoText;
 };
-
+// в зависимости от категории фомируются хар-ки
 export const createCharTemplates = (data) => {
   const filter = data.filters;
   switch (data.category) {
     case 'Недвижимость': return addEstateCharacteristic(filter.type, filter.area, filter['rooms-count']);
-    case "Автомобиль": return addCarCharacteristic(filter['production-year'], filter.transmission, filter['body-type']);
-    case "Ноутбук": return addLaptopCharacteristic(filter.type, filter['ram-value'], filter['screen-size'], filter['cpu-type']);
-    case "Фотоаппарат": return addCameraCharacteristic(filter.type, filter['matrix-resolution'], filter['supporting']);
+    case 'Автомобиль': return addCarCharacteristic(filter['production-year'], filter.transmission, filter['body-type']);
+    case 'Ноутбук': return addLaptopCharacteristic(filter.type, filter['ram-value'], filter['screen-size'], filter['cpu-type']);
+    case 'Фотоаппарат': return addCameraCharacteristic(filter.type, filter['matrix-resolution'], filter['supporting']);
     default: return 'Что-то пошло не так';
   }
 };

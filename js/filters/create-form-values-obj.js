@@ -1,6 +1,5 @@
-import {
-  resultsList, filterForm, categoriesSelect,
-  slider, priceMin, priceMax,
+import {categoriesSelect,
+  priceMin, priceMax,
   estateTypeBoxes, squareInput, roomRadios,
   cameraTypeBoxes, matrixSelect, videoSelect,
   laptopTypeBoxes, ramRadios, diagonalRadios, laptopProcessorBoxes,
@@ -8,14 +7,13 @@ import {
 } from '../dom-elements.js';
 
 import {
-  filterValues,
-  mainCategories,
   estateCategories, estateRooms,
-  laptopCategories, processorCategories,
+  laptopCategories,
   cameraCategories, resolutionVideo,
   carCategories
 } from '../form-categories.js';
 
+// тут считываются данные из форм фильтрации
 export const createFormValuesObj = () => {
 
   const readFromCheckbox = (boxes, dict) => {
